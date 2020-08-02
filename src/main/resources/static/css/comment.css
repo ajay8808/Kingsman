@@ -1,0 +1,83 @@
+#form-commentInfo {
+  width: 100%;
+}
+#comment-count {
+  margin-bottom: 10px;
+}
+#comment-input {
+  width: 50%;
+  height: 3.3em;
+}
+#comments {
+  margin-top: 10px;
+}
+.eachComment {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5em;
+  border-bottom: 1px solid #c1bcba;
+}
+.eachComment .name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.3em;
+  display: flex;
+  justify-content: space-between;
+}
+.eachComment .inputValue {
+  font-size: 1.2em;
+  font-style: italic;
+}
+.eachComment .time {
+  font-size: 0.7em;
+  color: #c1bcba;
+  font-style: oblique;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.eachComment .deleteComment {
+  background-color: cornflowerblue;
+  color: aliceblue;
+  border: 3px solid gainsboro;
+  border-radius: 10px;
+}
+
+#submit,
+#submit::after {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#submit {
+  background-color: coral;
+  border: 3px solid gainsboro;
+  border-radius: 10px;
+  color: white;
+  /* display: block; */
+  font-size: 1em;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: 1em 2em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+#submit:hover {
+  color: coral;
+  background-color: white;
+}
+
+/* BUTTON 5 */
+#submit {
+  overflow: hidden;
+}
+
+.comment-container{
+  margin: 2% 10%;
+  outline: 2px solid indianred;
+  outline-offset: 5px;
+}

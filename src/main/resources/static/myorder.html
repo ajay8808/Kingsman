@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>myorder</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<style>
+.form-control {
+	box-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.form-control:focus {
+	border-color: #33cabb;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-header.col {
+	padding: 0 !important;
+}
+
+.navbar {
+	background: #fff;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-bottom: 1px solid #dfe3e8;
+	border-radius: 0;
+}
+
+.login-form {
+	width: 340px;
+	margin: 30px auto;
+}
+
+.login-form form {
+	margin-bottom: 15px;
+	background: #f7f7f7;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+
+.login-form .hint-text {
+	color: #777;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.form-control, .btn {
+	min-height: 38px;
+	border-radius: 2px;
+}
+
+.login-btn {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.social-btn .btn {
+	margin: 10px 0;
+	font-size: 15px;
+	text-align: left;
+	line-height: 24px;
+}
+
+.social-btn .btn i {
+	float: left;
+	margin: 4px 15px 0 5px;
+	min-width: 15px;
+}
+
+#outer {
+	background-color: #f2f2f2;
+}
+
+.container {
+	background-color: white;
+}
+
+#footer {
+	background-color: #333333;
+}
+
+#wrapper {
+	/* 처음 표에서 제목줄 제외 컨텐츠 내용들*/
+	text-align: center;
+}
+
+#kingsman1 {
+	/*kingsman 이미지 가운데 정렬 */
+	display: block;
+	margin: 0 auto;
+}
+
+#kingsman2 {
+	/*kingsman 이미지 가운데 정렬 */
+	display: block;
+	margin: 0 auto;
+}
+
+#logout {
+	text-align: right;
+	float: center;
+}
+
+#subject {
+	text-align: center;
+}
+
+#subject+h2 {
+	text-align: center;
+}
+
+#contentfirstrow {
+	background-color: #c8cfcb;
+}
+
+#copyright {
+	text-align: center;
+	color: white;
+}
+
+#INFO {
+	text-align: left;
+	color: grey;
+}
+
+/*상품 테이블의 제목*/
+body table:nth-child(1) th {
+	text-align: center;
+}
+
+#footer {
+	background-color: #333333;
+}
+
+#footerleft {
+	text-align: left;
+	color: white;
+}
+
+#footerright {
+	text-align: right;
+	color: white;
+}
+
+#footerleft-2 {
+	font-weight: lighter;
+}
+
+body {
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+.container {
+	min-height: 73%;
+}
+
+body {
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+</style>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script>
+	$(function() {
+		var memail = location.search.split("=")[1]; //'highjune37@gmail.com'
+		//alert(memail);
+		$.ajax({
+			url : "/KingsMan/orderlists/" + memail,
+			type : "GET", 
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			success : function(data) {
+				var datas = data.orderlistResults;
+				var str = "";
+				for (var i = 0; i < datas.length; i++) {
+					str += "<tr>" + "<td>" + datas[i].odate + "</td>"
+							+ "<td><a href='order_detail.html?memail="
+							+ memail + "'>" + "[" + datas[i].odate + "-"
+							+ datas[i].onum + "]" + "</a></td>" + "<td>"
+							+ "주문완료" + "</td>" + "</tr>";
+				}
+				$("#datas").html(str);
+			},
+			error : function(err) {
+				alert("error = " + err);
+			}
+		});
+	});
+</script>
+</head>
+
+<body>
+	<div id="outer">
+		<nav class="navbar navbar-default navbar-expand-lg navbar-light"
+			style="background-color: #f8f8f8;">
+			<div id="navbarCollapse"
+				class="collapse navbar-collapse justify-content-start">
+
+
+				<ul class="nav navbar-nav navbar-right ml-auto">
+					<li class="nav-item"><a data-toggle="modal"
+						data-target="#myModal" href="#">Login</a>
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" data-backdrop="false">
+							<div class="login-form">
+								<form action="" method="post">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<h2 class="text-center">Login</h2>
+									<br />
+									<div class="text-center social-btn">
+										<a href="#" class="btn btn-warning btn-block"><i
+											class="fa kakao"></i> Sign in with <b>Kakao</b></a> <a href="#"
+											class="btn btn-success btn-block"><i class="fa naver"></i>
+											Sign in with <b>Naver</b></a> <a href="#"
+											class="btn btn-danger btn-block"><i class="fa google"></i>
+											Sign in with <b>Google</b></a>
+									</div>
+								</form>
+
+								<div class="hint-text small">
+									계정이 없으시다면 <a href="#" class="text-success">Register Now!</a>
+								</div>
+							</div>
+						</div></li>
+					<li class="nav-item"><a href="register.html">Sign up</a></li>
+					<li class="nav-item"><a href="myinfo.html">My info</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container" id="wrapper">
+
+		<!--센터로고-->
+		<a href="http://berwickkorea.com/"><img src=images/kingsman.png
+			width="300" height="150" id="kingsman1"></a>
+
+		<hr>
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+		<!--CART 제목글-->
+		<div class="row">
+			<h1 id="subject">MY ORDER</h1>
+			<h2>ㅡ</h2>
+		</div>
+
+		<div class="table-responsive">
+
+			<table class="table table-hover table-bordered table-condensed"
+				id="table1">
+				<tr class="active">
+					<th class="col-lg-6"><a href="">주문내역조회</a></th>
+					<!-- <th class="col-lg-6"><a href="">취소/반품/교환 내역(1)</a></th> -->
+				</tr>
+			</table>
+
+			<table class="table table-hover table-bordered table-condensed"
+				id="table2">
+				<thead>
+					<tr class="active" id="contentfirstrow">
+						<td>
+							<h4>주문일자</h4>
+						</td>
+						<td>
+							<h4>주문일련번호</h4> <!--"주문일자(odate)-주문번호(onum)" -->
+						</td>
+						<!-- <td>
+            <h4>주문금액</h4>
+          </td> -->
+						<td>
+							<h4>주문상태</h4>
+						</td>
+					</tr>
+				</thead>
+
+				<tbody id="datas">
+					<!-- <tr>
+          <td>2020-03-30</td>
+          <td><a href="order_detail.html">[20200330-000013]</a></td>
+          <td>842000</td>
+          <td>상품준비중</td>
+        </tr> -->
+				</tbody>
+			</table>
+
+			<hr>
+
+			<div id="INFO">
+				<h6>INFO</h6>
+				<ul>
+
+					<li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+					<li>개별상품에 대한 배송조회는 상세내역에서 확인하시기 바랍니다.</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<hr>
+
+	</div>
+
+	<footer class="panel-footer" id="footer">
+
+		<div class="row">
+
+			<div class="col-xs-4" id="footerleft">
+				<!--footer를 크게 3등분했을 때 left부분-->
+
+				<div>&nbsp;</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerleft-1">
+					<!--footer의 left부분에서 내용있는 첫 줄-->
+					<div class="col-xs-3">blog</div>
+					<div class="col-xs-3">FAQ</div>
+					<div class="col-xs-3">문의하기</div>
+					<div class="col-xs-3">&nbsp;</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerleft-2">
+					<!--footer의 left부분에서 내용있는 두번째 줄-->
+					<div class="col-xs-1">
+						<span class="glyphicon glyphicon-earphone"></span>
+					</div>
+					<div class="col-xs-3">02-111-1111</div>
+					<div class="col-xs-1">|</div>
+					<div class="col-xs-6">킹스맨(Kings@Kings.Kom)</div>
+					<div class="col-xs-1">&nbsp;</div>
+				</div>
+
+				<div class="row" id="footerleft-3">
+					<!--footer의 left부분에서 내용있는 세번째 줄-->
+					<div class="col-xs-1">
+						<!-- <span class="glyphicon glyphicon-home"></span> -->
+						<span class="glyphicon glyphicon-road"></span>
+					</div>
+					<div class="col-xs-10">Huntsman, Savile Row, London W1</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div>&nbsp;</div>
+
+			</div>
+			<!--footerleft 끝 -->
+
+
+			<div class="col-xs-4" id="footercenter">
+				<!--footer를 크게 3등분했을 때 center부분-->
+				<div>&nbsp;</div>
+
+			</div>
+			<!--footercenter 끝-->
+
+
+			<div class="col-xs-4" id="footerright">
+				<!--footer를 크게 3등분했을 때 right부분-->
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerright-1">
+					<!--footer의 right부분에서 내용있는 첫 줄(사진)-->
+					<div class="col-xs-6">&nbsp;</div>
+					<div class="col-xs-6">
+						<img src="images/instagram.PNG" width="50" height="50">
+					</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerright-2">
+					<!--footer의 right부분에서 내용있는 두번째 줄-->
+					<div class="col-xs-2">&nbsp;</div>
+					<div class="col-xs-4">Terms of Service</div>
+					<div class="col-xs-2">|</div>
+					<div class="col-xs-4">Privacy Policy</div>
+				</div>
+
+				<div class="row" id="footerright-2">
+					<!--footer의 right부분에서 내용있는 두번째 줄-->
+					© berwickkorea.com, All right reserved.
+				</div>
+
+			</div>
+			<!--footerright 끝-->
+
+		</div>
+
+	</footer>
+
+</body>
+
+</html>

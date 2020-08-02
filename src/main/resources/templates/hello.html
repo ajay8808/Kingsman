@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+
+</head>
+<body>
+	<h1>인증 성공</h1>
+	<ul>
+		<li>User Email : <span th:text="${#authentication.principal.attributes.email}"></span></li>
+		<li>User Name : <span th:text="${#authentication.principal.attributes.name}"></span></li>
+	</ul>
+	<!-- <form th:action="@{/logout}" method="get">
+		<button sec:authorize="isAuthenticated()">Logout</button>
+	</form> -->
+
+</body>
+</html>

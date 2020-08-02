@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsman.vo.MemberVO">
+
+	<parameterMap type="memberVO" id="memberInsertMap">
+		<parameter property="memail" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="mname" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="mphone" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="maddr" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="mcode" javaType="java.lang.Integer"
+			jdbcType="INTEGER" mode="IN" />
+	</parameterMap>
+
+	<insert id="memberInsert" parameterType="memberVO"
+		parameterMap="memberInsertMap" statementType="CALLABLE">
+		{ call member_insert_sp(?,?,?,?,?)}
+	</insert>
+
+	<resultMap type="memberVO" id="memberVOResultMap">
+		<result property="memail" column="memail"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="mname" column="mname"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="mphone" column="mphone"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="maddr" column="maddr"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="mcode" column="mcode"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+	</resultMap>
+
+	<parameterMap type="hashmap" id="memberSelectAllMap">
+		<parameter property="memberResults" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="memberVOResultMap" />
+	</parameterMap>
+
+	<select id="memberSelectAll" parameterMap="memberSelectAllMap"
+		statementType="CALLABLE">
+		{ call member_select_all_sp(?) }
+	</select>
+
+	<parameterMap type="hashmap" id="memberSelectMap">
+		<parameter property="memail" javaType="String" mode="IN"
+			jdbcType="VARCHAR" />
+		<parameter property="memberResult" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="memberVOResultMap" />
+	</parameterMap>
+	<select id="memberSelect" parameterMap="memberSelectMap"
+		statementType="CALLABLE">
+		{ call member_select_sp(?, ?) }
+	</select>
+
+	<delete id="memberDelete" parameterType="java.lang.String"
+		statementType="CALLABLE">
+		{ call member_delete_sp(#{memail})}
+	</delete>
+
+	<parameterMap type="memberVO" id="memberUpdateMap">
+		<parameter property="memail" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="mname" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="mphone" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="maddr" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+
+	<update id="memberUpdate" parameterType="memberVO"
+		parameterMap="memberUpdateMap" statementType="CALLABLE">
+		{ call
+		member_update_sp(?,?,?,?)}
+	</update>
+</mapper>
+
+
+
+
+
+
+

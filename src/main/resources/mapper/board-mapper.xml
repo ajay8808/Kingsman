@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsman.vo.BoardVO">
+
+	<parameterMap type = "boardVO" id ="boardInsertMap">
+		<parameter property="bnum" javaType="java.lang.Integer"   jdbcType="INTEGER" mode="IN"/>
+		<parameter property="bcont" javaType="java.lang.String"   jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="bdate"	 javaType="java.util.Date"   jdbcType="DATE" mode="IN"/>
+		<parameter property="memail"	javaType="java.lang.String"   jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="pserial" javaType="java.lang.Integer"   jdbcType="INTEGER" mode="IN"/>
+	</parameterMap>
+	
+	<insert id="boardInsert" parameterType="boardVO" 
+		parameterMap="boardInsertMap" statementType="CALLABLE">
+		{ call board_insert_sp(?,?,?,?,?)}
+	</insert>
+	
+	<resultMap type="boardVO" id="boardVOResultMap">
+		<result property="bnum" column="bnum" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="bcont" column="bcont" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="bdate" column="bdate" javaType="java.util.Date"   jdbcType="DATE"/>
+		<result property="memail" column="memail" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="pserial" column="pserial" javaType="java.lang.Integer" jdbcType="INTEGER"/>				
+	</resultMap>
+	
+	<parameterMap type="hashmap" id="boardSelectAllMap">
+		<parameter property="boardResults" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="boardVOResultMap"/>
+	</parameterMap>
+	
+	<select id ="boardSelectAll" parameterMap="boardSelectAllMap" statementType="CALLABLE">
+		{ call board_select_all_sp(?) }
+	</select>
+	
+	
+	
+	<delete id="boardDelete" parameterType="java.lang.Integer" statementType="CALLABLE">
+		{ call board_delete_sp(#{bnum})}
+	</delete>
+	
+	
+
+<!--  <parameterMap type="hashmap" id="parameterSelectMap">
+		<parameter property="bnum" javaType="Integer" 
+			mode="IN" jdbcType="INTEGER"/>
+		<parameter property="result" javaType="ResultSet" jdbcType="CURSOR"
+			mode="OUT" resultMap="boardVOResultMap" />		
+	</parameterMap>
+	
+	<select id="selectBoard" parameterMap="parameterSelectMap" statementType="CALLABLE">		
+		{ call select_select_sp(?, ?) }
+	</select>  -->
+</mapper>
+
+
+
+

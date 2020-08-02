@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsman.vo.ProductVO">
+
+	<parameterMap type="hashmap" id="productSelectMap">
+		<parameter property="pcode" javaType="String" mode="IN"
+			jdbcType="VARCHAR" />
+		<parameter property="productResult" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="productVOResultMap" />
+	</parameterMap>
+
+	<select id="productSelect" parameterMap="productSelectMap"
+		statementType="CALLABLE">
+		{ call product_select_sp(?, ?) }
+	</select>
+	
+	<parameterMap type="hashmap" id="productSelectOneMap">
+		<parameter property="pserial" javaType="Integer" mode="IN"
+			jdbcType="INTEGER" />
+		<parameter property="productResult" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="productVOResultMap" />
+	</parameterMap>
+	
+	<select id="productSelectOne" parameterMap="productSelectOneMap"
+		statementType="CALLABLE">
+		{ call product_select_one_sp(?, ?) }
+	</select>
+
+
+	<resultMap type="productVO" id="productVOResultMap">
+		<result property="pserial" column="pserial"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="pname" column="pname"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="pprice" column="pprice"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="psize" column="psize"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="pcode" column="pcode"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="pimg" column="pimg"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+
+
+	<parameterMap type="hashmap" id="productSelectAllMap">
+		<parameter property="productResults" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="productVOResultMap" />
+	</parameterMap>
+
+	<select id="productSelectAll" parameterMap="productSelectAllMap"
+		statementType="CALLABLE">
+		{ call product_select_all_sp(?) }
+	</select>
+
+
+
+
+	<parameterMap type="productVO" id="productUpdateMap">
+		<parameter property="pserial" javaType="Integer"
+			jdbcType="INTEGER" />
+		<parameter property="pname" javaType="String"
+			jdbcType="VARCHAR" />
+		<parameter property="pprice" javaType="Integer"
+			jdbcType="INTEGER" />
+		<parameter property="psize" javaType="Integer"
+			jdbcType="INTEGER" />
+		<parameter property="pcode" javaType="String"
+			jdbcType="VARCHAR" />
+		<parameter property="pimg" javaType="String"
+			jdbcType="VARCHAR" />
+	</parameterMap>
+
+	<update id="productUpdate" parameterType="productVO"
+		parameterMap="productUpdateMap" statementType="CALLABLE">
+		{ call
+		product_update_sp(?,?,?,?,?,?) }
+	</update>
+
+
+
+</mapper>
+	
+	
+

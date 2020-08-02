@@ -1,0 +1,428 @@
+
+
+<!doctype html>
+
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+   
+    #outer {
+      background-color: #c8cfcb;
+    }
+
+    .container {
+      background-color: white;
+    }
+
+
+    #logout {
+      /* LOGOUT CART ORDER MYINFO */
+      text-align: right;
+      float: center;
+    }
+
+    #footer {
+      background-color: #333333;
+    }
+
+    #footerleft {
+      text-align: left;
+      color: white;
+    }
+
+    #footerright {
+      text-align: right;
+      color: white;
+    }
+
+    #footerleft-2 {
+      font-weight: lighter;
+    }
+
+    .container {
+      padding-top: 140px;
+
+    }
+
+    .container_back_ground {
+      background-color: white;
+    }
+
+    .card-header {
+      background-color: #8c8c8c !important;
+    }
+
+    .card-body {
+      background-color: #dcdcdc !important;
+    }
+
+    .btn-outline-primary:hover {
+      background-color: #dae0e5 !important;
+    }
+
+     body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+ 
+ 
+     html,
+    body {
+      height: 100%;
+      margin: 0;
+    } 
+
+    .container_back_ground {
+      min-height: 66%;
+    }
+    
+  </style>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
+ <script>
+   
+	 $(function() {						
+			var memail = location.search.split("&")[0];
+			memail = memail.split("=")[1];
+			var mname = location.search.split("&")[1];			
+			/* mname = mname.split("=")[1]; */
+			mname = decodeURI(mname);			
+			$("#memail").val(memail);
+			$("#mname").val(mname);
+			
+			if (memail != null && mname != null) {
+				$("#topLogin").text(memail);
+				$("#topLogin").attr("data-toggle", "").attr("href",
+						"mypage.html?memail=" + memail + "&mname=" + mname);
+				//sign up 대신에 Log-Out 만들자
+				$("#signUp").text("Logout").attr("data-toggle", "").attr("href","main.html");
+					
+			}
+			$("#btnHome").bind("click", function() {
+				location.href = "main.html?memail=" + memail + "&mname=" + mname;
+			});
+			$("#btnUpdate").bind("click", function() {
+				location.href = "myinfo.html?memail=" + memail + "&mname=" + mname;
+			});
+			
+			$("#btnCart").bind("click", function() {
+				location.href = "cart.html?memail=" + memail;
+			});
+			$("#btnMyOrder").bind("click", function() {
+				location.href = "myorder.html?memail=" + memail ;
+			});
+			
+			});
+ </script>
+
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!--ddddddddddddddddddd-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+
+  <!-- Optional JavaScript -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+
+
+</head>
+
+
+<body>
+
+
+
+  <nav class="navbar navbar-default navbar-expand-lg navbar-light">
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+
+
+     <ul class="nav navbar-nav navbar-right ml-auto">
+				<li class="nav-item"><a href="#" id="btnHome" >Home</a></li>
+				<li class="nav-item"><a data-toggle="modal" id="topLogin"
+					data-target="#myModal" href="#">Login</a>
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="login-form">
+              <form action=" method=" post">
+                <h2 class="text-center">Login</h2>
+                <br />
+                <div class="text-center social-btn">
+
+                  <a href="#" class="btn btn-warning btn-block"><i class="fa kakao"></i> Sign in
+                    with <b>Kakao</b></a>
+
+                  <a href="#" class="btn btn-success btn-block"><i class="fa naver"></i> Sign in
+                    with <b>Naver</b></a>
+
+                  <a href="#" class="btn btn-danger btn-block"><i class="fa google"></i> Sign in
+                    with <b>Google</b></a>
+              </form>
+
+              <div class="hint-text small">계정이 없으시다면 <a href="#" class="text-success">Register Now!</a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="register.html" id="signUp">Sign up</a>
+        </li>
+       <li class="nav-item"><a href="javascript:void(0)"
+					id="#">My info</a></li>
+      </ul>
+    </div>
+    </div>
+    </div>
+  </nav>
+
+  <center><img src="images/kingsman.png" height="90px"/></center>
+  
+  
+ 
+
+  <div class="container_back_ground">
+    <div class="container">
+      <div class="card-deck mb-3 text-center" style="padding-bottom: 50px;">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-3 font-weight-normal"><b>장바구니</b></h4>
+          </div>
+          <div class="card-body">           
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><b>회원님이</b></li>
+              <li><b>장바구니에 추가하신</b></li>
+              <li><b>상품을 보시고 싶으시다면</b></li>
+              <li><b>하단을 클릭해 주시기 바랍니다.</b></li>
+            </ul>     
+            <button type="button" id="btnCart" 
+              class="btn btn-lg btn-block btn-outline-primary">
+              <svg class="bi bi-bucket-fill" width="1em" height="1em"
+               viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 1.5A4.5 4.5 0 003.5 6h-1a5.5 5.5 0 1111 0h-1A4.5 4.5 0 008 1.5z"
+                  clip-rule="evenodd" />
+                <path fill-rule="evenodd"
+                  d="M1.61 5.687A.5.5 0 012 5.5h12a.5.5 0 01.488.608l-1.826 8.217a1.5 1.5 0 01-1.464 1.175H4.802a1.5 1.5 0 01-1.464-1.175L1.512 6.108a.5.5 0 01.098-.42z"
+                  clip-rule="evenodd" />
+              </svg></button>
+          </div>
+        </div>
+        
+        
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-3 font-weight-normal"><b>정보수정</b></h4>
+          </div>
+          <div class="card-body">           
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><b>소중한 회원 정보를위해</b></li>
+              <li><b>저희가 도와드리겠습니다</b></li>
+              <li><b>정보 수정이 필요 하다면</b></li>
+              <li><b>하단을 클릭해 주시기 바랍니다.</b></li>
+            </ul>            
+            <button id="btnUpdate" type="button" 
+              class="btn btn-lg btn-block btn-outline-primary"><svg class="bi bi-info-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+</svg></button>
+          </div>
+        </div>
+
+
+
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-3 font-weight-normal"><b>주문상세</b></h4>
+          </div>
+          <div class="card-body">           
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><b>회원님이 주문하신</b></li>
+              <li><b>상품의 정보를</b></li>
+              <li><b>확인하고 싶다면</b></li>
+              <li><b>하단을 클릭해 주시기 바랍니다.</b></li>
+            </ul>
+            <button type="button" id="btnMyOrder"
+              class="btn btn-lg btn-block btn-outline-primary"><svg class="bi bi-search" width="1em" height="1em"
+                viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                  clip-rule="evenodd" />
+                <path fill-rule="evenodd"
+                  d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                  clip-rule="evenodd" />
+              </svg></button>
+          </div>
+        </div>
+       
+</div>
+</div>
+</div>
+
+
+
+
+  <!-- <footer class="panel-footer" id="footer">
+
+          <div class="row"> <!--제일 큰 row-->
+
+  <footer class="panel-footer" id="footer">
+
+    <div class="row">
+      <!--제일 큰 row-->
+
+      <div class="col-xs-4" id="footerleft">
+        <!--footer를 크게 3등분했을 때 left부분-->
+
+        <div>&nbsp;</div>
+
+        <div>&nbsp;</div>
+
+        <div class="row" id="footerleft-1">
+          <!--footer의 left부분에서 내용있는 첫 줄-->
+          <div class="col-xs-3">
+            blog
+          </div>
+          <div class="col-xs-3">
+            FAQ
+          </div>
+          <div class="col-xs-3">
+            문의하기
+          </div>
+          <div class="col-xs-3">
+            &nbsp;
+          </div>
+        </div>
+
+        <div>&nbsp;</div>
+
+        <div class="row" id="footerleft-2">
+          <!--footer의 left부분에서 내용있는 두번째 줄-->
+          <div class="col-xs-1">
+            <span class="glyphicon glyphicon-earphone"></span>
+          </div>
+          <div class="col-xs-3">
+            02-111-1111
+          </div>
+          <div class="col-xs-1">
+            |
+          </div>
+          <div class="col-xs-6">
+            킹스맨(Kings@Kings.com)
+          </div>
+          <div class="col-xs-1">
+            &nbsp;
+          </div>
+        </div>
+
+        <div class="row" id="footerleft-3">
+          <!--footer의 left부분에서 내용있는 세번째 줄-->
+          <div class="col-xs-1">
+            <!-- <span class="glyphicon glyphicon-home"></span> -->
+            <span class="glyphicon glyphicon-road"></span>
+          </div>
+          <div class="col-xs-10">
+            Huntsman, Savile Row, London W1
+          </div>
+        </div>
+
+        <div>&nbsp;</div>
+
+        <div>&nbsp;</div>
+
+      </div>
+      <!--footerleft 끝 -->
+
+
+      <div class="col-xs-4" id="footercenter">
+        <!--footer를 크게 3등분했을 때 center부분-->
+        <div>&nbsp;</div>
+
+      </div>
+      <!--footercenter 끝-->
+
+
+      <div class="col-xs-4" id="footerright">
+        <!--footer를 크게 3등분했을 때 right부분-->
+
+        <div>&nbsp;</div>
+
+        <div class="row" id="footerright-1">
+          <!--footer의 right부분에서 내용있는 첫 줄(사진)-->
+          <div class="col-xs-6">
+            &nbsp;
+          </div>
+          <div class="col-xs-6">
+            <img src="images/instagram.PNG" width="50" height="50" />
+          </div>
+        </div>
+
+        <div>&nbsp;</div>
+
+        <div class="row" id="footerright-2">
+          <!--footer의 right부분에서 내용있는 두번째 줄-->
+          <div class="col-xs-2">
+            &nbsp;
+          </div>
+          <div class="col-xs-4">
+            Terms of Service
+          </div>
+          <div class="col-xs-2">
+            |
+          </div>
+          <div class="col-xs-4">
+            Privacy Policy
+          </div>
+        </div>
+
+        <div class="row" id="footerright-2">
+          <!--footer의 right부분에서 내용있는 두번째 줄-->
+          © Kingsman.com, All right reserved.
+        </div>
+
+      </div>
+      <!--footerright 끝-->
+
+    </div>
+    <!--제일 큰 row-->
+
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+

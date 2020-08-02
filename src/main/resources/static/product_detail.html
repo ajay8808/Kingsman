@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>상품상세페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Varela+Round">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" id="sf-main-css"
+	href="https://cdn.unipair.com/wp-content/themes/atelier/css/main.css"
+	type="text/css" media="all" />
+<link rel="stylesheet" id="sf-woocommerce-css"
+	href="https://cdn.unipair.com/wp-content/themes/atelier/css/sf-woocommerce.css"
+	type="text/css" media="all" />
+<link rel="stylesheet" id="sf-responsive-css"
+	href="https://cdn.unipair.com/wp-content/themes/atelier/css/responsive.css"
+	type="text/css" media="all" />
+<link rel="stylesheet" href="./css/detail.css">
+<link rel="stylesheet" href="./css/navibar.css" />
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<style>
+body {
+	overflow-x: hidden;
+}
+
+#outer {
+	background-color: #c8cfcb;
+}
+
+.container {
+	background-color: white;
+}
+
+#logout {
+	/* LOGOUT CART ORDER MYINFO */
+	text-align: right;
+	float: center;
+}
+
+#footer {
+	background-color: #333333;
+}
+
+#footerleft {
+	text-align: left;
+	color: white;
+}
+
+#footerright {
+	text-align: right;
+	color: white;
+}
+
+#footerleft-2 {
+	font-weight: lighter;
+}
+
+.form-control {
+	box-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.form-control:focus {
+	border-color: #33cabb;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-header.col {
+	padding: 0 !important;
+}
+
+.navbar {
+	background: #fff;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-bottom: 1px solid #dfe3e8;
+	border-radius: 0;
+}
+
+.login-form {
+	width: 340px;
+	margin: 30px auto;
+}
+
+.login-form form {
+	margin-bottom: 15px;
+	background: #f7f7f7;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+
+.login-form .hint-text {
+	color: #777;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.form-control, .btn {
+	min-height: 38px;
+	border-radius: 2px;
+}
+
+.login-btn {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.social-btn .btn {
+	margin: 10px 0;
+	font-size: 15px;
+	text-align: left;
+	line-height: 24px;
+}
+
+.social-btn .btn i {
+	float: left;
+	margin: 4px 15px 0 5px;
+	min-width: 15px;
+}
+
+@media screen and (max-width: 300px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: "";
+		height: 100%;
+		width: 300px;
+	}
+}
+
+.form-control {
+	box-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.form-control:focus {
+	border-color: #33cabb;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-header.col {
+	padding: 0 !important;
+}
+
+.navbar {
+	background: #fff;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-bottom: 1px solid #dfe3e8;
+	border-radius: 0;
+}
+
+.modal-dialog {
+	width: 340px;
+	margin: 30px auto;
+}
+
+.modal-dialog form {
+	margin-bottom: 15px;
+	background: #f7f7f7;
+	box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+	padding: 30px;
+}
+
+.modal-dialog .hint-text {
+	color: #777;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.form-control, .btn {
+	min-height: 38px;
+	border-radius: 2px;
+}
+
+.login-btn {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.social-btn .btn {
+	margin: 10px 0;
+	font-size: 15px;
+	text-align: left;
+	line-height: 24px;
+}
+
+.social-btn .btn i {
+	float: left;
+	margin: 4px 15px 0 5px;
+	min-width: 15px;
+}
+
+.modal-header {
+	background-color: #f7f7f7;
+	color: black;
+}
+
+.modal-body {
+	background-color: #f7f7f7;
+}
+
+.modal-footer {
+	text-align: left;
+	margin-left: 20px;
+	color: black;
+}
+
+.register {
+	color: white;
+	font-size: 1.2em;
+	font-weight: 700;
+}
+
+#myModal {
+	top: 30%;
+}
+</style>
+<script>
+	$(function() {
+		var pcode = location.search.split("&")[0];
+		pcode = pcode.split("=")[1];
+		 var memail = location.search.split("&")[1];
+		memail = memail.split("=")[1];
+		var mname = location.search.split("&")[2];
+		mname = mname.split("=")[1]; 
+		 if (memail != null && mname != null) {
+			$("#topLogin").text(memail);
+			$("#topLogin").attr("data-toggle", "").attr("href",
+					"mypage.html?memail=" + memail + "&mname=" + mname);
+			//sign up 대신에 Log-Out 만들자
+			
+			$("#signUp").text("Logout").attr("data-toggle", "").attr("href","main.html");
+		}
+
+		$("#btnUpdate").bind("click", function() {
+			location.href = "myinfo.html?memail=" + memail + "&mname=" + mname;
+		}); 
+		var pserial = null;
+		var psize;
+		$("#psize1").click(function() {
+			psize = 250;
+		});
+		$("#psize2").click(function() {
+			psize = 260;
+		});
+		$("#psize3").click(function() {
+			psize = 270;
+		});
+		$("#psize4").click(function() {
+			psize = 280;
+		});
+		$("#colorBrown").click(
+				function() {
+					//pcode = location.search.split("=")[1];
+					var pchar = 2;
+					//alert(pchar);
+					pcode = pcode.substring(0, pcode.length - 1);
+					pcode = pcode + pchar;
+					//alert(pcode);
+					$.ajax({
+						url : "/KingsMan/product/" + pcode,
+						//url: "/KingsMan/product/PB2",
+						type : "GET",
+						dataType : "json",
+						success : function(data) {
+							var datas = data.product;
+							pserial = datas.pserial;
+							var img1 = "";
+							var img2 = "";
+							var img3 = "";
+							$("#pprice").html(
+									"<span style='size:2em;'>" + datas.pprice
+											+ "</span>");
+							$(".pname").text(datas.pname);
+							var idxA = 0;
+							var idxB = datas.pimg.indexOf(",");
+
+							img1 = datas.pimg.substring(idxA, idxB);
+							idxA = idxB + 1;
+							datas.pimg = datas.pimg.substring(idxA);
+
+							idxB = datas.pimg.indexOf(",");
+							img2 = datas.pimg.substring(idxA, idxB);
+
+							idxA = idxB + 1;
+							datas.pimg = datas.pimg.substring(idxA);
+
+							idxB = datas.pimg.indexOf(",");
+							img3 = datas.pimg.substring(idxA, idxB);
+ 
+							$("#product-img").attr("src", img1);
+							//alert("img = " + img1);
+						},
+						error : function(err) {
+							alert("Error = " + err);
+						}
+					});
+				});
+		$("#colorBlack").click(
+				function() {
+					var pchar = 1;
+					//alert(pchar);
+					pcode = pcode.substring(0, pcode.length - 1);
+					pcode = pcode + pchar;
+					//alert(pcode);
+					$.ajax({
+						url : "/KingsMan/product/" + pcode,
+						//url: "/KingsMan/product/PB2",
+						type : "GET",
+						dataType : "json",
+						async:false,
+						success : function(data) {
+							var datas = data.product;
+							pserial = datas.pserial;
+							var img1 = "";
+							var img2 = "";
+							var img3 = "";
+							$("#pprice").html(
+									"<span style='size:2em;'>" + datas.pprice
+											+ "</span>");
+							$(".pname").text(datas.pname);
+							var idxA = 0;
+							var idxB = datas.pimg.indexOf(",");
+
+							img1 = datas.pimg.substring(idxA, idxB);
+							idxA = idxB + 1;
+							datas.pimg = datas.pimg.substring(idxA);
+
+							idxB = datas.pimg.indexOf(",");
+							img2 = datas.pimg.substring(idxA, idxB);
+
+							idxA = idxB + 1;
+							datas.pimg = datas.pimg.substring(idxA);
+
+							idxB = datas.pimg.indexOf(",");
+							img3 = datas.pimg.substring(idxA, idxB);
+
+							$("#product-img").attr("src", img1);
+							//alert("img = " + img1);
+						},
+						error : function(err) {
+							alert("Error = " + err);
+						}
+					});
+				});
+		$.ajax({
+			url : "/KingsMan/product/" + pcode,
+			//url: "/KingsMan/product/PB2",
+			type : "GET",
+			dataType : "json",
+			success : function(data) {
+				var datas = data.product;
+				var memail = data.memail;
+				
+				 pserial = data.pserial
+				var href = $("#moveToCart").attr("href");
+				$("#moveToCart").attr("href", href+memail);
+				var img1 = "";
+				var img2 = "";
+				var img3 = "";
+				$("#pprice").html(
+						"<span style='size:2em;'>" + datas.pprice + "</span>");
+				$(".pname").text(datas.pname);
+				var idxA = 0;
+				var idxB = datas.pimg.indexOf(",");
+
+				img1 = datas.pimg.substring(idxA, idxB);
+				idxA = idxB + 1;
+				datas.pimg = datas.pimg.substring(idxA);
+				idxA = 0;
+				//alert("1 : "+img1);
+
+				img2 = datas.pimg.substring(idxA, idxB);
+				idxA = idxB + 1;
+				datas.pimg = datas.pimg.substring(idxA);
+				idxA = 0;
+				//alert("2 : "+img2);
+
+				img3 = datas.pimg.substring(idxA, idxB);
+				idxA = idxB + 1;
+				datas.pimg = datas.pimg.substring(idxA);
+				idxA = 0;
+				//alert("3 : "+img3); 
+
+				$("#product-img").attr("src", img1);
+				$("#imgDetail1").attr("src", img2);
+				$("#imgDetail2").attr("src", img3);
+				//alert("img = " + img1);
+
+				$("#toPayment").click(
+						function() {
+							location.replace("payment.html?memail=" + memail 
+									+ "&pcode=" + pcode + "&psize=" + psize+"&pserial="+pserial);
+						});
+				$("#toCart").click(function() {
+					if (psize == 260) {
+						pserial += 1;
+					} else if (psize == 270) {
+						pserial += 2;
+					} else if (psize == 280) {
+						pserial += 3;
+					}
+					alert("상품시리얼 : "+pserial);
+					alert("상품이름 : "+datas.pname);
+					$.ajax({
+						url : '/KingsMan/cart',
+						type : "POST",
+						data : JSON.stringify({ //서버로 보내는 데이터
+							"memail" : memail,
+							"pserial" : pserial
+						}),
+						contentType : "application/json; charset=UTF-8",
+						dataType : "json",
+						success : function(data) { //서버에서 받는 데이터
+							if (data.code == 'success') {
+								alert("장바구니에 성공적으로 담았습니다.");
+							}
+						},
+						error : function(err) {
+							alert("장바구니에 담는도중 오류가 발생하였습니다.");
+						}
+					});
+				});
+			},
+			error : function(err) {
+				alert(err);
+			}
+		});
+
+	})
+</script>
+</head>
+
+<body>
+	<header class="navbar navbar-default navbar-expand-lg navbar-light"
+		style="background-color: #f8f8f8; margin: 0px;">
+		<div id="navbarCollapse"
+			class="collapse navbar-collapse justify-content-start">
+			<ul class="nav navbar-nav navbar-right ml-auto">
+				<li class="nav-item"><a data-toggle="modal" id="topLogin"
+					data-target="#myModal" href="#">Login</a>
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" data-backdrop="false">
+						<div class="login-form">
+							<form action="" method="post">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+								<h2 class="text-center">Login</h2>
+								<br />
+								<div class="text-center social-btn">
+									<a href="#" class="btn btn-warning btn-block"><i
+										class="fa kakao"></i> Sign in with <b>Kakao</b></a> <a href="#"
+										class="btn btn-success btn-block"><i class="fa naver"></i>
+										Sign in with <b>Naver</b></a> <a href="#"
+										class="btn btn-danger btn-block"><i class="fa google"></i>
+										Sign in with <b>Google</b></a>
+								</div>
+							</form>
+							<div class="hint-text small">
+								계정이 없으시다면 <a href="#" class="text-success">Register Now!</a>
+							</div>
+						</div>
+					</div></li>
+					<li class="nav-item"><a href="register.html"  id="signUp">Sign up</a></li>
+				<li class="nav-item"><a href="javascript:void(0)"
+					id="btnUpdate">My info</a></li>
+			</ul>
+		</div>
+	</header>
+
+	<div id="content">
+
+		<div id="container">
+			<!--// TOP BAR //-->
+
+			<!--// HEADER //-->
+			<div class="header-wrap page-header-standard">
+				<div id="header-section" class="header-6">
+					<header id="header" class="fw-header clearfix">
+						<div class="container">
+							<div class="row" style="height: 125px;">
+								<div class="header-left col-sm-4">
+									<div class="aux-item">
+										<a href="#" class="side-slideout-link menu-bars-link"
+											data-side="left"><span>Menu</span></a>
+									</div>
+								</div>
+
+								<div id="logo" class="col-sm-4 logo-center has-img clearfix"
+									data-anim="">
+									<a href="https://www.unipair.com" id="imgcon"> <img
+										class="standard" src="images/kingsman.png"
+										alt="Kingsman logo error" height="40px" /> <!-- #TAG0418 반응형 일단 비활성화 후 base.css 의 img 관련 max-width와 max-height 설정으로 크기 고정 -->
+										<!-- <img class="retina" src="images/Kingsman_logo.jpg" alt="Kingsman logo error"
+                                              height="71" width="150" /> -->
+
+									</a>
+								</div>
+
+								<div class="header-right col-sm-4">
+									<div class="aux-item aux-cart-wishlist">
+										<nav class="std-menu cart-wishlist">
+											<ul class="menu">
+												<li class="parent shopping-bag-item"><a
+													class="cart-contents" id="moveToCart" href="cart.html?memail="><i
+														class="sf-icon-cart" style="margin-top: 50px;"></i><span
+														class="cart-text">Cart</span><span class="menu-item-title">Cart</span><span
+														class="num-items">0</span></a> <!-- #TAG0418 hover시 sub-menu 보이도록 base.css에 추가, title 삭제하여 hover시 안보이도록함 -->
+													<ul class="sub-menu">
+														<li>
+															<div class="shopping-bag"
+																data-empty-bag-txt="장바구니가 비어 있습니다."
+																data-singular-item-txt="item in the cart"
+																data-multiple-item-txt="items in the cart">
+																<div class="loading-overlay">
+																	<i class="sf-icon-loader"></i>
+																</div>
+																<div class="bag-empty">장바구니가 비어 있습니다.</div>
+															</div>
+														</li>
+													</ul></li>
+												<li class="wishlist-item"><a class="wishlist-link"
+													href="https://www.unipair.com/wishlist/?wishlist-action"><span
+														class="menu-item-title">Wishlist</span> <i
+														class="sf-icon-wishlist" style="margin-top: 50px;"></i><span
+														class="count">0</span><span class="star"></span></a>
+													<ul class="sub-menu">
+														<li>
+															<div class="wishlist-bag">
+																<div class="bag-contents">
+																	<div class="wishlist-empty">위시 리스트가 비어있습니다.</div>
+																</div>
+																<div class="bag-buttons no-items">
+																	<a
+																		class="sf-button standard sf-icon-reveal wishlist-button"
+																		href="https://www.unipair.com/wishlist/?wishlist-action"><i
+																		class="sf-icon-search-quickview"></i><span
+																		class="text">View Wishlist</span></a>
+																</div>
+															</div>
+														</li>
+													</ul></li>
+											</ul>
+										</nav>
+									</div>
+									<!-- <div class="aux-item aux-search"><nav class="std-menu">
+  <ul class="menu">
+  <li class="menu-search parent"><a href="#" class="header-search-link header-search-link-alt"><i class="sf-icon-search"></i></a>
+  <div class="ajax-search-wrap search-wrap" data-ajaxurl="https://www.unipair.com/wp-admin/admin-ajax.php"><div class="ajax-loading"></div><form method="get" class="ajax-search-form" action="https://www.unipair.com/"><input type="hidden" name="post_type" value="" /><input type="text" placeholder="Search" name="s" autocomplete="off" /></form><div class="ajax-search-results"></div></div>
+  </li>
+  </ul>
+  </nav></div> -->
+								</div>
+							</div>
+							<!-- CLOSE .row -->
+						</div>
+						<!-- CLOSE .container -->
+					</header>
+
+					<!--  메뉴바 시작 -->
+					<div id="main-nav" class="sticky-header center-menu"
+						style="margin-top: 20px;">
+						<div class="container">
+							<div class="row">
+								<!-- 가운데 뷰 / 서치 / 보더 -->
+								<div class="menu-left">
+									<nav id="main-navigation" class="std-menu clearfix"
+										style="padding-right: 15px; margin-left: 380px;">
+										<div class="menu-home-menu-container">
+											<!--  #TAG0418 ul 에 class로 지정된 menu를 삭제하고 직접 css를 base에 추가 ul과 li , menu-item-text 를 줌 -->
+											<br />
+											<ul style="text-align: center;">
+												<li><a href="main.html"><span
+														class="menu-item-text">HOME</span></a></li>
+												<li><a href="SelectAll.html"><span
+														class="menu-item-text">VIEW</span></a></li>
+
+												<li><a href="comment.html"> <span
+														class="menu-item-text">BOARD</span></a></li>
+												<li><a href="SelectAll.html"> <span
+														class="menu-item-text">SEARCH</span></a></li>
+											</ul>
+											<br /> <br />
+										</div>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="pdp-container">
+
+			<div class="product-image-container">
+				<div class="pdp-images pdp-gallery-main"
+					style="background-color: gray; padding: 3px; display: inline-block; margin-left: 200px; margin-top: 50px;">
+					<div class="display-small-up">
+						<img class="gallery-media main" id="product-img"
+							style="width: 600px;" />
+					</div>
+				</div>
+
+				<div class="product-information">
+					<div
+						style="width: 371px; height: 520px; margin-left: 1200px; border: 1px solid black; background-color: rgba(185, 185, 185, 0.1); padding: 15px;"
+						id="product-menu">
+						<div class="product-summary display-small-up">
+							<h1 class="product-name pname" id="pname"></h1>
+
+							<p class="product-price flex flex-flow-wrap">
+								<span id="pprice" class="sale" style="font-weight: 700;"></span>
+							</p>
+
+							<p class="product-badge text-extrabold"></p>
+
+
+						</div>
+
+						<div class="product-summary display-small-up">
+							<br />
+
+							<div class="wrap-star">
+								<div class="star-rating">
+									<span style="width: 79%;"></span>
+								</div>
+							</div>
+						</div>
+
+						<form method="POST" action="/cart/add">
+							<div class="product-variations option-wrap">
+								<div
+									class="product-option_radio variation-selector flex-no-gutters selector-size square btn-group"
+									data-toggle="buttons" data-component-radio="{required:true}"
+									data-brz-components-type="SIZE" data-attribute-name="SIZE">
+									<div class="btn-group btn-group-toggle" data-toggle="buttons">
+										<div class="flex flex-flow-wrap btn-group">
+											<label class="button btn button-primary"
+												style="background-color: black;" id="colorBlack"> <input
+												type="radio" data-id="3" data-value="black" name="COLOR" checked/>
+												<span style="background-color: black; color: white;"
+												class="variation-anchor flex flex-justify-center flex-align-center">BLK</span>
+											</label> <label class="button btn button-primary"
+												style="background-color: brown;" id="colorBrown"> <input
+												type="radio" data-id="4" data-value="brown" name="COLOR" />
+												<span style="background-color: brown; color: white;"
+												class="variation-anchor flex flex-justify-center flex-align-center">BRN</span>
+											</label>
+
+										</div>
+									</div>
+								</div>
+								<p class="print-message msg" style="text-align: right;">색상을
+									선택하세요.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+								<div
+									class="product-option_radio variation-selector flex-no-gutters selector-size square btn-group"
+									data-toggle="buttons" data-component-radio="{required:true}"
+									data-brz-components-type="SIZE" data-attribute-name="SIZE">
+									<div class="btn-group btn-group-toggle" data-toggle="buttons">
+										<div class="flex flex-flow-wrap btn-group">
+											<label class="button btn button-primary psize" id="psize1">
+												<input type="radio" name="SIZE" value="250" /> <span
+												class="variation-anchor flex flex-justify-center flex-align-center">250</span>
+											</label> <label class="button btn button-primary psize" id="psize2">
+												<input type="radio" name="SIZE" value="260" /> <span
+												class="variation-anchor flex flex-justify-center flex-align-center">260</span>
+											</label> <label class="button btn button-primary psize" id="psize3">
+												<input type="radio" name="SIZE" value="270" /> <span
+												class="variation-anchor flex flex-justify-center flex-align-center">270</span>
+											</label> <label class="button btn button-primary psize" id="psize4">
+												<input type="radio" name="SIZE" value="280" /> <span
+												class="variation-anchor flex flex-justify-center flex-align-center">280</span>
+											</label>
+
+										</div>
+									</div>
+								</div>
+								<p class="print-message msg" style="text-align: right;">사이즈를
+									선택하세요.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+								<div
+									class="variation-selector row flex-no-gutters enter-quantity quantity"
+									data-component-quantity="{maxQuantity:null,msg:개 까지 구매가능 합니다.,quantityStateMsg:상품의 수량이 없습니다.}">
+									<div style="display: inline-block;">
+										<div style="display: inline-block;">
+											<input type="button" class="button" value="-"
+												style="width: 50px; height: 50px; background-color: black; color: white;" />
+										</div>
+										<div class="flex flex-flow-wrap"
+											style="display: inline-block;">
+											<input type="text" name="quantity" id="productQTY"
+												placeholder="1"
+												style="width: 50px; height: 50px; text-align: center;">
+										</div>
+										<div style="display: inline-block;">
+											<input type="button" class="button" value="+"
+												style="width: 50px; height: 50px; background-color: black; color: white;" />
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="status-wrap">
+								<div class="product-variations-action">
+									<div class="btn-wrap row flex-no-gutters" data-add-item="">
+										<div class="col action-cart">
+											<a
+												class="button btn-link btn-cart flex flex-justify-center flex-align-center addcart-btn line-thin"
+												href="#" id="toCart"
+												style="text-decoration: none; width: 172px;">장바구니</a>
+										</div>
+
+										<div class="col action-buy">
+											<a
+												class="button btn-link button-primary btn-buy flex flex-justify-center flex-align-center"
+												href="#" id="toPayment"
+												style="text-decoration: none; width: 172px;">바로구매</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+
+						<div class="product-etc-action">
+							<div class="row flex-no-gutters">
+								<div
+									class="delivery-links col flex-align-end flex-justify-center">
+									<div class="flex">
+										<a class="link text-underline flex-inline"
+											href="#ship-info-popup"
+											data-uk-modal="{target: '#ship-info-popup'}"> <span
+											class="link-text">배송정보</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="product-promo-container"
+						style="margin-left: 200px; padding: 5px;">
+						<div class="pdp-details-section pdp-more-info active">
+							<div class="pdp-details-content">
+								<br />
+								<div style="font-size: 3em;">상세 정보</div>
+								<p>
+
+									<span style="font-size: 24px;" class="pname"> </span>
+								</p>
+								<br />
+
+								<p>
+									<img alt="" src="" border="0" id="imgDetail1" />
+								</p>
+								<p>
+									<img alt="" src="" border="0" id="imgDetail2" />
+								</p>
+
+								<br /> <br /> <br />
+							</div>
+						</div>
+
+						<div class="pdp-details-section active">
+							<div class="section-head">
+								<h3 class="section-title text-bold">LOOKS FROM THE KINGSMAN
+									COMMUNITY</h3>
+								<p class="section-description">
+									<span>LIKE 커뮤니티 연결 <strong>#킹스맨 #KingsMan</strong></span>
+								</p>
+							</div>
+							<div>
+								<div class="attractt-container" data-idx="0" data-board="grid"
+									data-code="DBgxCbz8YJPxKbM">
+									<iframe
+										src="https://www.attractt.com/embed/grid/DBgxCbz8YJPxKbM?"
+										id="attractt-ifm-0"
+										style="width: 832px; height: 282px; overflow: hidden; border: 0px;"></iframe>
+								</div>
+							</div>
+						</div>
+
+						<div class="pdp-details-section product-tags">
+							<div
+								class="product-tags-head flex flex-justify-between flex-align-center">
+								<h3 class="title">DESCRIPTIONS</h3>
+							</div>
+							<div class="product-tags-contents">
+								<table style="width: 300px; font-size: 1.2em;">
+									<tr>
+										<td style="color: #9b9b9b;">Model</td>
+										<td>4893</td>
+									</tr>
+									<tr>
+										<td style="color: #9b9b9b;">Leather</td>
+										<td>Box Calf</td>
+									</tr>
+									<tr>
+										<td style="color: #9b9b9b;">Color</td>
+										<td>Black / Brown</td>
+									</tr>
+									<tr>
+										<td style="color: #9b9b9b;">Size</td>
+										<td>240-280</td>
+									</tr>
+									<tr>
+										<td style="color: #9b9b9b;">Outsole</td>
+										<td>JR</td>
+									</tr>
+									<tr>
+										<td style="color: #9b9b9b;">Last</td>
+										<td>246 Last</td>
+									</tr>
+									<tr>
+										<td style="color: #9b9b9b;">Origin</td>
+										<td>Made in Spain</td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
+
+					</div>
+					<!-- 여기 넘어가면 최상단으로 다시 올라감 -->
+				</div>
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<footer class="panel-footer" id="footer" style="bottom: 0px;">
+
+		<div class="row">
+			<!--제일 큰 row-->
+
+			<div class="col-xs-4" id="footerleft">
+				<!--footer를 크게 3등분했을 때 left부분-->
+
+				<div>&nbsp;</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerleft-1">
+					<!--footer의 left부분에서 내용있는 첫 줄-->
+					<div class="col-xs-3">blog</div>
+					<div class="col-xs-3">FAQ</div>
+					<div class="col-xs-3">문의하기</div>
+					<div class="col-xs-3">&nbsp;</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerleft-2">
+					<!--footer의 left부분에서 내용있는 두번째 줄-->
+					<div class="col-xs-1">
+						<span class="glyphicon glyphicon-earphone"></span>
+					</div>
+					<div class="col-xs-3">02-111-1111</div>
+					<div class="col-xs-1">|</div>
+					<div class="col-xs-6">킹스맨(Kings@Kings.Kom)</div>
+					<div class="col-xs-1">&nbsp;</div>
+				</div>
+
+				<div class="row" id="footerleft-3">
+					<!--footer의 left부분에서 내용있는 세번째 줄-->
+					<div class="col-xs-1">
+						<!-- <span class="glyphicon glyphicon-home"></span> -->
+						<span class="glyphicon glyphicon-road"></span>
+					</div>
+					<div class="col-xs-10">Huntsman, Savile Row, London W1</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div>&nbsp;</div>
+
+			</div>
+			<!--footerleft 끝 -->
+
+
+			<div class="col-xs-4" id="footercenter">
+				<!--footer를 크게 3등분했을 때 center부분-->
+				<div>&nbsp;</div>
+
+			</div>
+			<!--footercenter 끝-->
+
+
+			<div class="col-xs-4" id="footerright">
+				<!--footer를 크게 3등분했을 때 right부분-->
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerright-1">
+					<!--footer의 right부분에서 내용있는 첫 줄(사진)-->
+					<div class="col-xs-6">&nbsp;</div>
+					<div class="col-xs-6">
+						<img src="images/instagram.PNG" width="50" height="50">
+					</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerright-2">
+					<!--footer의 right부분에서 내용있는 두번째 줄-->
+					<div class="col-xs-2">&nbsp;</div>
+					<div class="col-xs-4">Terms of Service</div>
+					<div class="col-xs-2">|</div>
+					<div class="col-xs-4">Privacy Policy</div>
+				</div>
+
+				<div class="row" id="footerright-2">
+					<!--footer의 right부분에서 내용있는 두번째 줄-->
+					© berwickkorea.com, All right reserved.
+				</div>
+
+			</div>
+			<!--footerright 끝-->
+
+		</div>
+		<!--제일 큰 row-->
+
+	</footer>
+
+<script>
+
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://ajay12-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+
+
+</script>
+</body>
+
+</html>

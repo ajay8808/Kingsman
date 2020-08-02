@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsman.vo.OrderdetailVO">
+	
+	<resultMap type="MyOrderdetailVO" id="OrderdetailVOResultMap">
+	
+		<result property="pdserial" column="pdserial" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="pdqty" column="pdqty" javaType="java.lang.Integer" jdbcType="INTEGER" />		
+		
+		<result property="memail" column="memail" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="mname" column="mname" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="mphone" column="mphone" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="maddr" column="maddr" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="mcode" column="mcode" javaType="java.lang.Integer" jdbcType="INTEGER" />
+		
+		<result property="pserial" column="pserial"	javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="pname" column="pname"	javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="pprice" column="pprice" javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="psize" column="psize"	javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="pcode" column="pcode"	javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="pimg" column="pimg" javaType="java.lang.String" jdbcType="VARCHAR" />
+		
+		<result property="onum" column="onum"  javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="odate" column="odate"  javaType="java.util.Date" jdbcType="DATE" />
+		<result property="ostatus" column="ostatus" javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="cmethod" column="cmethod" javaType="java.lang.Integer" jdbcType="INTEGER" />				
+			
+	</resultMap>	
+		
+	<parameterMap type="hashmap" id="orderdetailSelectAllMap">
+		<parameter property="memail" javaType="java.lang.String"  mode="IN" jdbcType="VARCHAR" />
+		<parameter property="orderdetailResult" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="OrderdetailVOResultMap" />
+	</parameterMap>
+	<select id="selectDetail" parameterMap="orderdetailSelectAllMap"	statementType="CALLABLE">
+		{ call orderdetail_select_all_sp(?, ?) }
+	</select>
+	
+	<parameterMap type="orderdetailVO" id="orderdetailInsertMap">
+		<parameter property="pdqty" javaType="java.lang.Integer"
+			jdbcType="INTEGER" mode="IN" />
+		<parameter property="pserial" javaType="java.lang.Integer"
+			jdbcType="INTEGER" mode="IN" />
+		<parameter property="onum" javaType="java.lang.Integer"
+			jdbcType="INTEGER" mode="IN" />
+	</parameterMap>
+
+	<insert id="insertDetail" parameterType="orderdetailVO"
+		parameterMap="orderdetailInsertMap" statementType="CALLABLE">
+		{ call orderdetail_insert_sp(?,?,?)}
+	</insert>
+
+</mapper>
+
+
+
+
+
+
+

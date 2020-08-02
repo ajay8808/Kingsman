@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsman.vo.cartVO">
+
+	<parameterMap type="cartVO" id="cartInsertMap">
+		<parameter property="memail" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="pserial" javaType="java.lang.Integer"
+			jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+
+	<insert id="cartInsert" parameterType="cartVO"
+		parameterMap="cartInsertMap" statementType="CALLABLE">
+		{ call
+		cart_insert_user_sp(?,?) }
+	</insert>
+
+
+	<delete id="cartDelete" parameterType="Integer"
+		statementType="CALLABLE">
+		{ call cart_delete_user_sp(#{cnum})}
+	</delete>
+
+
+	<resultMap type="cartVO" id="cartVOResultMap">
+		<result property="cnum" column="cnum"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="memail" column="memail"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="pserial" column="pserial"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+	</resultMap>
+
+	<parameterMap type="hashmap" id="cartSelectAllMap">
+		<parameter property="memail" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="cartResults" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="cartVOResultMap" />
+	</parameterMap>
+
+	<select id="cartSelectAll" parameterMap="cartSelectAllMap"
+		statementType="CALLABLE">
+		{ call cart_select_all_user_sp(?,?) }
+	</select>
+
+
+
+</mapper>
+

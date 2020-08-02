@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsman.vo.OrderlistVO">
+
+	<parameterMap type="orderlistVO" id="orderlistInsertMap">
+		<parameter property="ostatus" javaType="java.lang.Integer"
+			jdbcType="INTEGER" mode="IN" />
+		<parameter property="cmethod" javaType="java.lang.Integer"
+			jdbcType="INTEGER" mode="IN" />
+		<parameter property="memail" javaType="java.lang.String"
+			jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+
+	<insert id="insert" parameterType="OrderlistVO"
+		parameterMap="orderlistInsertMap" statementType="CALLABLE">
+		{ call orderlist_insert_sp(?,?,?)}
+	</insert>
+
+	<!-- ///////////////////////////////////////////////////////////////////////// -->
+
+	<resultMap type="OrderlistVO" id="OrderlistVOResultMap">
+		<result property="onum" column="onum"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="odate" column="odate"
+			javaType="java.util.Date" jdbcType="DATE" />
+		<result property="ostatus" column="ostatus"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="cmethod" column="cmethod"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="memail" column="memail"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<parameterMap type="hashmap" id="orderlistSelectAllMap">
+		<parameter property="memail" javaType="java.lang.String"   jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="orderlistResults" javaType="ResultSet"	jdbcType="CURSOR" mode="OUT" resultMap="OrderlistVOResultMap" />
+	</parameterMap>
+
+	<select id="selectAll" parameterMap="orderlistSelectAllMap"	statementType="CALLABLE">
+		{ call orderlist_select_all_sp(?, ?) }
+	</select>
+
+	<!-- ///////////////////////////////////////////////////////////////////////// -->
+
+	<parameterMap type="hashmap" id="orderlistSelectMap">
+		<parameter property="onum" javaType="Integer" mode="IN"
+			jdbcType="INTEGER" />
+		<parameter property="orderlistResult" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="OrderlistVOResultMap" />
+	</parameterMap>
+	<select id="select" parameterMap="orderlistSelectMap"
+		statementType="CALLABLE">
+		{ call orderlist_select_sp(?, ?) }
+	</select>
+
+	<!-- ///////////////////////////////////////////////////////////////////////// -->
+
+	<delete id="delete" parameterType="java.lang.Integer"
+		statementType="CALLABLE">
+		{ call orderlist_delete_sp(#{onum})}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+

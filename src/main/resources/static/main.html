@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Varela+Round"/>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" id="sf-main-css"
+	href="https://cdn.unipair.com/wp-content/themes/atelier/css/main.css"
+	type="text/css" media="all" />
+<link rel="stylesheet" id="sf-woocommerce-css"
+	href="https://cdn.unipair.com/wp-content/themes/atelier/css/sf-woocommerce.css"
+	type="text/css" media="all" />
+<link rel="stylesheet" id="sf-responsive-css"
+	href="https://cdn.unipair.com/wp-content/themes/atelier/css/responsive.css"
+	type="text/css" media="all" />
+<link rel="stylesheet" href="css/navibar.css" />
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css"/>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+<style>
+.swiper-container {
+	max-width: 1920px;
+	max-height: 1080px;
+}
+
+.swiper-slide {
+	text-align: center;
+	display: flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
+	align-items: center; /* 위아래 기준 중앙정렬 */
+	justify-content: center; /* 좌우 기준 중앙정렬 */
+}
+
+.swiper-slide img {
+	box-shadow: 0 0 5px #555;
+}
+
+#outer {
+	background-color: #c8cfcb;
+}
+
+#logout {
+	/* LOGOUT CART ORDER MYINFO */
+	text-align: right;
+	float: center;
+}
+
+#footer {
+	background-color: #333333;
+}
+
+#footerleft {
+	text-align: left;
+	color: white;
+}
+
+#footerright {
+	text-align: right;
+	color: white;
+}
+
+#footerleft-2 {
+	font-weight: lighter;
+}
+
+.form-control {
+	box-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.form-control:focus {
+	border-color: #33cabb;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-header.col {
+	padding: 0 !important;
+}
+
+.navbar {
+	background: #fff;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-bottom: 1px solid #dfe3e8;
+	border-radius: 0;
+}
+
+.login-form {
+	width: 340px;
+	margin: 30px auto;
+}
+
+.login-form form {
+	margin-bottom: 15px;
+	background: #f7f7f7;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+
+.login-form .hint-text {
+	color: #777;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.form-control, .btn {
+	min-height: 38px;
+	border-radius: 2px;
+}
+
+.login-btn {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.social-btn .btn {
+	margin: 10px 0;
+	font-size: 15px;
+	text-align: left;
+	line-height: 24px;
+}
+
+.social-btn .btn i {
+	float: left;
+	margin: 4px 15px 0 5px;
+	min-width: 15px;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+@media screen and (max-width: 300px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: "";
+		height: 100%;
+		width: 300px;
+	}
+}
+
+.form-control {
+	box-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.form-control:focus {
+	border-color: #33cabb;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-header.col {
+	padding: 0 !important;
+}
+
+.navbar {
+	background: #fff;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-bottom: 1px solid #dfe3e8;
+	border-radius: 0;
+}
+
+.modal-dialog {
+	width: 340px;
+	margin: 30px auto;
+}
+
+.modal-dialog form {
+	margin-bottom: 15px;
+	background: #f7f7f7;
+	box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+	padding: 30px;
+}
+
+.modal-dialog .hint-text {
+	color: #777;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.form-control, .btn {
+	min-height: 38px;
+	border-radius: 2px;
+}
+
+.login-btn {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.social-btn .btn {
+	margin: 10px 0;
+	font-size: 15px;
+	text-align: left;
+	line-height: 24px;
+}
+
+.social-btn .btn i {
+	float: left;
+	margin: 4px 15px 0 5px;
+	min-width: 15px;
+}
+
+.modal-header {
+	background-color: #f7f7f7;
+	color: black;
+}
+
+.modal-body {
+	background-color: #f7f7f7;
+}
+
+.modal-footer {
+	text-align: left;
+	margin-left: 20px;
+	color: black;
+}
+
+.register {
+	color: white;
+	font-size: 1.2em;
+	font-weight: 700;
+}
+
+#myModal {
+	top: 30%;
+}
+
+#topnavbar {
+	position: sticky;
+	top: 0;
+	z-index: 999;
+}
+
+.container {
+	background-color: white;
+}
+</style>
+<script>
+	$(function() {
+		$('.oauth2').bind(
+				"click",
+				function() {
+					location.href = "/KingsMan/oauth2/authorization/"
+							+ $(this).attr("data-social");
+				});
+		new Swiper('.swiper-container');
+		var memail = location.search.split("&")[0];
+		memail = memail.split("=")[1];
+		var mname = location.search.split("&")[1];
+		mname = mname.split("=")[1];
+		//memail = memail.split("@")[0];
+		
+		if (memail != null && mname != null) {
+			$("#topLogin").text(memail);
+			$("#topLogin").attr("data-toggle", "").attr("href",
+					"mypage.html?memail=" + memail + "&mname=" + mname);
+			//sign up 대신에 Log-Out 만들자
+			
+			$("#signUp").text("Logout").attr("data-toggle", "").attr("href","main.html");
+		}
+
+		$("#btnUpdate").bind("click", function() {
+			location.href = "myinfo.html?memail=" + memail + "&mname=" + mname;
+		});
+		$("#selectAllBtn").bind("click", function() {
+			location.href = "SelectAll.html?memail=" + memail + "&mname=" + mname;
+		});
+
+	})
+</script>
+</head>
+
+<body>
+
+	<header
+		class="navbar navbar-default navbar-expand-lg navbar-light fixed-top"
+		id="topnavbar" style="background-color: #f8f8f8; margin: 0px;">
+		<div id="navbarCollapse"
+			class="collapse navbar-collapse justify-content-start">
+			<ul class="nav navbar-nav navbar-right ml-auto">
+				<li class="nav-item"><a data-toggle="modal" id="topLogin"
+					data-target="#myModal" href="#" >Login</a>
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" data-backdrop="false">
+						<div class="login-form">
+							<form action="" method="POST">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+								<h2 class="text-center">Login</h2>
+								<br />
+								<div class="text-center social-btn">
+									<!-- <a href="#" class="btn btn-warning btn-block">
+										<i class="fa kakao"></i>Sign in with <b>Kakao</b></a>  -->
+									<!-- <a href="#"	class="btn btn-success btn-block oauth2 btn-social" data-social="naver">
+										<i class="fa naver"></i>Sign in with <b>Naver</b></a>  -->
+									<a href="#" class="btn btn-danger btn-block oauth2 btn-social"
+										data-social="google"> <i class="fa google"></i>Sign in
+										with <b>Google</b></a>
+									<!-- <a href="login.html" class="btn btn-danger btn-block"> LOGIN</a> -->
+								</div>
+							</form>
+							
+						</div>
+					</div></li>
+				<li class="nav-item"><a href="register.html" id="signUp">Sign up</a></li>
+				<li class="nav-item"><a href="javascript:void(0)"
+					id="btnUpdate">My info</a></li>
+			</ul>
+		</div>
+	</header>
+
+
+	<div id="container">
+		<!--// TOP BAR //-->
+
+		<!--// HEADER //-->
+		<div class="header-wrap page-header-standard">
+			<div id="header-section" class="header-6">
+				<header id="header" class="fw-header clearfix">
+					<div class="container">
+						<div class="row" style="height: 125px;">
+							<div class="header-left col-sm-4">
+								<div class="aux-item">
+									<a href="#" class="side-slideout-link menu-bars-link"
+										data-side="left" style="margin-top: 50px;"><span>Menu</span></a>
+								</div>
+							</div>
+
+							<div id="logo" class="col-sm-4 logo-center has-img clearfix"
+								data-anim="">
+								 <img
+									class="standard" src="images/Kingsman_logo.jpg"
+									alt="Kingsman logo error" height="40px" /> <!-- #TAG0418 반응형 일단 비활성화 후 base.css 의 img 관련 max-width와 max-height 설정으로 크기 고정 -->
+									<!-- <img class="retina" src="images/Kingsman_logo.jpg" alt="Kingsman logo error"
+                                            height="71" width="150" /> -->
+							
+							</div>
+
+							<div class="header-right col-sm-4">
+								<div class="aux-item aux-cart-wishlist">
+									<nav class="std-menu cart-wishlist">
+										<ul class="menu">
+											<li class="parent shopping-bag-item"><a
+					 							class="cart-contents" href="https://www.unipair.com/cart/"><i
+													class="sf-icon-cart" style="margin-top: 100px;"></i><span
+													class="cart-text">Cart</span><span class="menu-item-title">Cart</span><span
+													class="num-items">0</span></a> <!-- #TAG0418 hover시 sub-menu 보이도록 base.css에 추가, title 삭제하여 hover시 안보이도록함 -->
+												<ul class="sub-menu">
+													<li>
+														<div class="shopping-bag"
+															data-empty-bag-txt="장바구니가 비어 있습니다."
+															data-singular-item-txt="item in the cart"
+															data-multiple-item-txt="items in the cart">
+															<div class="loading-overlay">
+																<i class="sf-icon-loader"></i>
+															</div>
+															<div class="bag-empty">장바구니가 비어 있습니다.</div>
+														</div>
+													</li>
+												</ul></li>
+											<li class="wishlist-item"><a class="wishlist-link"
+												href="https://www.unipair.com/wishlist/?wishlist-action"
+												style="height: 124px;"><span class="menu-item-title">Wishlist</span>
+													<i class="sf-icon-wishlist" style="margin-top: 50px;"></i><span
+													class="count">0</span><span class="star"></span></a>
+												<ul class="sub-menu">
+													<li>
+														<div class="wishlist-bag">
+															<div class="bag-contents">
+																<div class="wishlist-empty">위시 리스트가 비어있습니다.</div>
+															</div>
+															<div class="bag-buttons no-items">
+																<a
+																	class="sf-button standard sf-icon-reveal wishlist-button"
+																	href="https://www.unipair.com/wishlist/?wishlist-action"><i
+																	class="sf-icon-search-quickview"></i><span class="text">View
+																		Wishlist</span></a>
+															</div>
+														</div>
+													</li>
+												</ul></li>
+										</ul>
+									</nav>
+								</div>
+
+							</div>
+						</div>
+						<!-- CLOSE .row -->
+					</div>
+					<!-- CLOSE .container -->
+				</header>
+
+				<!--  메뉴바 시작 -->
+				<div id="main-nav" class="sticky-header center-menu">
+					<div class="container">
+						<div class="row">
+							<!-- 가운데 뷰 / 서치 / 보더 -->
+							<div class="menu-left">
+								<nav id="main-navigation" class="std-menu clearfix"
+									style="padding-right: 15px;">
+									<div class="menu-home-menu-container">
+										<!--  #TAG0418 ul 에 class로 지정된 menu를 삭제하고 직접 css를 base에 추가 ul과 li , menu-item-text 를 줌 -->
+										<br />
+										<ul style="text-align: center;">
+											<li><a href="main.html"><span class="menu-item-text">HOME</span></a>
+											</li>
+											<li><a href="#" id="selectAllBtn"><span
+													class="menu-item-text">VIEW</span></a></li>
+
+											<li><a href="comment.html"> <span
+													class="menu-item-text">BOARD</span></a></li>
+											<li><a href="SelectAll.html"> <span
+													class="menu-item-text">SEARCH</span></a></li>
+										</ul>
+										<br /> <br />
+									</div>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="onepage" class="swiper-container">
+		<div class="s1 swiper-wrapper">
+			<div class="swiper-slide">
+				<img src="/KingsMan/images/background-dark.png">
+			</div>
+			<div class="swiper-slide">
+				<img src="/KingsMan/images/bakcground.png">
+			</div>
+			<div class="swiper-slide">
+				<img src="/KingsMan/images/mmm.png">
+			</div>
+		</div>
+		<!-- <section>
+			<div class="bg">
+				<div class="type-wrapper">
+					<p class="typing-txt">신사가 되는 첫 걸음</p>
+					<p class="typing"></p>
+				</div>
+			</div>
+		</section> -->
+		<!-- <section class="s3">
+			<div class="bg">
+				<table class="list">
+					<tr>
+						<td><img src="images/1.jpg" width="250px" /></td>
+						<td><img src="images/2.jpg" width="250px" /></td>
+						<td><img src="images/3.jpg" width="250px" /></td>
+						<td><img src="images/4.jpg" width="250px" /></td>
+						<td><img src="images/5.jpg" width="250px" /></td>
+						<td><img src="images/6.jpg" width="250px" /></td>
+					</tr>
+					<tr>
+						<td><img src="images/7.jpg" width="250px" /></td>
+						<td><img src="images/8.jpg" width="250px" /></td>
+						<td><img src="images/9.jpg" width="250px" /></td>
+						<td><img src="images/10.jpg" width="250px" /></td>
+						<td><img src="images/11.jpg" width="250px" /></td>
+						<td><img src="images/12.jpg" width="250px" /></td>
+					</tr>
+				</table>
+			</div>
+		</section> -->
+	</div>
+	<footer class="panel-footer" id="footer" style="padding: 30px;">
+
+		<div class="row">
+			<!--제일 큰 row-->
+
+			<div class="col-xs-4" id="footerleft">
+				<!--footer를 크게 3등분했을 때 left부분-->
+
+				<div>&nbsp;</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerleft-1">
+					<!--footer의 left부분에서 내용있는 첫 줄-->
+					<div class="col-xs-3">blog</div>
+					<div class="col-xs-3">FAQ</div>
+					<div class="col-xs-3">문의하기</div>
+					<div class="col-xs-3">&nbsp;</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerleft-2">
+					<!--footer의 left부분에서 내용있는 두번째 줄-->
+					<div class="col-xs-1">
+						<span class="glyphicon glyphicon-earphone"></span>
+					</div>
+					<div class="col-xs-3">02-111-1111</div>
+					<div class="col-xs-1">|</div>
+					<div class="col-xs-6">킹스맨(Kings@Kings.Kom)</div>
+					<div class="col-xs-1">&nbsp;</div>
+				</div>
+
+				<div class="row" id="footerleft-3">
+					<!--footer의 left부분에서 내용있는 세번째 줄-->
+					<div class="col-xs-1">
+						<!-- <span class="glyphicon glyphicon-home"></span> -->
+						<span class="glyphicon glyphicon-road"></span>
+					</div>
+					<div class="col-xs-10">Huntsman, Savile Row, London W1</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div>&nbsp;</div>
+
+			</div>
+			<!--footerleft 끝 -->
+
+
+			<div class="col-xs-4" id="footercenter">
+				<!--footer를 크게 3등분했을 때 center부분-->
+				<div>&nbsp;</div>
+
+			</div>
+			<!--footercenter 끝-->
+
+
+			<div class="col-xs-4" id="footerright">
+				<!--footer를 크게 3등분했을 때 right부분-->
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerright-1">
+					<!--footer의 right부분에서 내용있는 첫 줄(사진)-->
+					<div class="col-xs-6">&nbsp;</div>
+					<div class="col-xs-6">
+						<img src="images/instagram.PNG" width="50" height="50">
+					</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerright-2">
+					<!--footer의 right부분에서 내용있는 두번째 줄-->
+					<div class="col-xs-2">&nbsp;</div>
+					<div class="col-xs-4">Terms of Service</div>
+					<div class="col-xs-2">|</div>
+					<div class="col-xs-4">Privacy Policy</div>
+				</div>
+
+				<div class="row" id="footerright-2">
+					<!--footer의 right부분에서 내용있는 두번째 줄-->
+					© berwickkorea.com, All right reserved.
+				</div>
+
+			</div>
+			<!--footerright 끝-->
+
+		</div>
+		<!--제일 큰 row-->
+
+	</footer>
+
+</body>
+
+</html>

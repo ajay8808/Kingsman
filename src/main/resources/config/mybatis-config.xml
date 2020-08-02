@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.kingsman.vo.MemberVO" alias="memberVO" />
+		<typeAlias type="com.kingsman.vo.BoardVO" alias="boardVO" />
+		<typeAlias type="com.kingsman.vo.CartVO" alias="cartVO" />
+		<typeAlias type="com.kingsman.vo.MyOrderdetailVO" alias="MyOrderdetailVO" />
+		<typeAlias type="com.kingsman.vo.OrderdetailVO" alias="orderdetailVO" />
+		<typeAlias type="com.kingsman.vo.OrderlistVO" alias="orderlistVO" />
+		<typeAlias type="com.kingsman.vo.ProductVO" alias="productVO" />
+	</typeAliases>
+</configuration>
+
+

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+ 
+    <title>Checkout example · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+    <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Favicons -->
+    <!-- <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">  -->
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .back_ground {
+            background-color: #dae0e5 !important;
+            padding-bottom: 50px;
+        }
+        
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+</head>
+<!--------------------------------------네비바 부분----------------------------------------------------------->
+
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="메인 홈페이지">KINGS MAN</a><button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03"
+            aria-expanded="flase" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample03">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">ㅋㅋㅋ</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown03">
+                        <a class="dropdown-item" href="#">가</a>
+                        <a class="dropdown-item" href="#">나</a>
+                        <a class="dropdown-item" href="#">다</a>
+                        <a class="dropdown-item" href="#">라</a>
+                        <a class="dropdown-item" href="#">마</a>
+                        <a class="dropdown-item" href="#">바</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-md-0">
+                <input class="form-control" type="text" placeholder="Search">
+            </form>
+        </div>
+    </nav>
+
+
+
+    <div class="back_ground">
+        <div class="container">
+            <div class="py-5 text-center">
+
+                <h2><b>상품정보수정</b></h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 order-md-2 mb-4" style="padding-top: 10px;">
+                    <img src="./images/대안1.jpg" /><br /><br />
+                    <center>
+                        <h5><b>아비뇽 Black</b></h5>
+                    </center>
+                </div>
+
+
+
+                <div class="col-md-8 order-md-1">
+                    <h4 class="mb-3">상품 기본정보</h4>
+                    <form class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">상품 이름</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="아비뇽 Black" value=""
+                                    required>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">상품 가격</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="￦630,000" value=""
+                                    required>                                    
+
+                            </div>
+
+                        </div>
+
+                       
+
+
+                        <div class="shoes-size">
+                            <label for="name"><b>Black</b> 재고</label></br>                            
+                            <input type="checkbox" name="size" value="245" >245
+                            <input type="checkbox" name="size" value="250" checked>250
+                            <input type="checkbox" name="size" value="255" checked>255
+                            <input type="checkbox" name="size" value="260" checked>260
+                            <input type="checkbox" name="size" value="265" >265
+                            <input type="checkbox" name="size" value="270" >270
+                            <input type="checkbox" name="size" value="275" checked>275
+                            <input type="checkbox" name="size" value="280" checked>280
+                            <input type="checkbox" name="size" value="285" >285
+                            <input type="checkbox" name="size" value="290" checked>290
+
+                        </div>
+                    </br>    
+                        <div class="shoes-size1">
+                            <label for="name"><font color="Brown"><b>Brown</b></font> 재고</label></br>                            
+                            <input type="checkbox" name="size" value="245" checked>245
+                            <input type="checkbox" name="size" value="250" checked>250
+                            <input type="checkbox" name="size" value="255" checked>255
+                            <input type="checkbox" name="size" value="260" checked>260
+                            <input type="checkbox" name="size" value="265" >265
+                            <input type="checkbox" name="size" value="270" >270
+                            <input type="checkbox" name="size" value="275" checked>275
+                            <input type="checkbox" name="size" value="280" checked>280
+                            <input type="checkbox" name="size" value="285" checked>285
+                            <input type="checkbox" name="size" value="290" checked>290
+
+                        </div>
+                    </br>
+
+
+
+
+
+                        <div class="mb-3">
+                            <label for="address2">상품 세부/주의 사항</label>
+                            <!-- <input type="text" class="form-control" id="address2" placeholder="기존 세부사항"> -->
+                            <textarea class="form-control" placeholder="기존 세부사항"
+                                style="height:100px; resize: none;"></textarea>
+                        </div>
+
+                        <hr class="mb-4">
+                        <div>
+                            <center>
+                                <button class="btn btn-primary btn-lg" type="submit"><a href="" onClick="alert('정말 수정하시겠습니까?')"/>수정</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary btn-lg" type="submit"><a href="" onClick="alert('정말 삭제하시겠습니까?')"/>삭제</button>
+                            </center>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2019 KINGS MAN</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="/docs/4.4/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
+        crossorigin="anonymous"></script>
+    <script src="form-validation.js"></script>
+</body>
+
+</html>

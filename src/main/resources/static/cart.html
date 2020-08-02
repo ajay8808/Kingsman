@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cart</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<style>
+.form-control {
+	box-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.form-control:focus {
+	border-color: #33cabb;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-header.col {
+	padding: 0 !important;
+}
+
+.navbar {
+	background: #fff;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-bottom: 1px solid #dfe3e8;
+	border-radius: 0;
+}
+
+.login-form {
+	width: 340px;
+	margin: 30px auto;
+}
+
+.login-form form {
+	margin-bottom: 15px;
+	background: #f7f7f7;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+
+.login-form .hint-text {
+	color: #777;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.form-control, .btn {
+	min-height: 38px;
+	border-radius: 2px;
+}
+
+.login-btn {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.social-btn .btn {
+	margin: 10px 0;
+	font-size: 15px;
+	text-align: left;
+	line-height: 24px;
+}
+
+.social-btn .btn i {
+	float: left;
+	margin: 4px 15px 0 5px;
+	min-width: 15px;
+}
+
+body {
+	background-color: #f2f2f2
+}
+
+#wrapper {
+	/* 처음 표에서 제목줄 제외 컨텐츠 내용들*/
+	text-align: center;
+	background-color: white;
+}
+
+#kingsman1 {
+	/*kingsman 이미지 가운데 정렬 */
+	display: block;
+	margin: 0 auto;
+}
+
+#first {
+	float: right;
+}
+
+#logout {
+	text-align: right;
+	float: center;
+}
+
+#subject {
+	text-align: center;
+}
+
+#subject+h2 {
+	text-align: center;
+}
+
+#icon {
+	text-align: center;
+}
+
+#firstrow {
+	background-color: #c8cfcb;
+}
+
+#copyright {
+	text-align: center;
+}
+
+#INFO {
+	text-align: left;
+	color: grey;
+}
+
+#secondtable {
+	margin-left: auto;
+}
+
+/*상품 테이블의 제목*/
+body table:nth-child(1) th {
+	text-align: center;
+}
+
+/*상품 테이블의 데이터*/
+body table:nth-child(1) td {
+	text-align: center;
+}
+
+#footer {
+	background-color: #333333;
+}
+
+#footerleft {
+	text-align: left;
+	color: white;
+}
+
+#footerright {
+	text-align: right;
+	color: white;
+}
+
+#footerleft-2 {
+	font-weight: lighter;
+}
+</style>
+<script src="js/jquery-3.5.0.min.js"></script>
+
+<script>
+var psize;
+var pcode;
+	$(function() {
+		
+		var memail = location.search.split("=")[1]; //'highjune37@gmail.com'
+		// memail = memail.split("=")[1];
+		// var mname = location.search.split("&")[1];
+		//mname = mname.split("=")[1];
+		if (memail != null ) {
+			$("#topLogin").text(memail);
+			$("#topLogin").attr("data-toggle", "").attr("href",
+					"mypage.html?memail=" + memail );
+			//sign up 대신에 Log-Out 만들자
+			
+			$("#signUp").text("Logout").attr("data-toggle", "").attr("href","main.html");
+		}
+		$("#btnHome").bind("click", function() {
+			location.href = "main.html?memail=" + memail ;
+		});
+		$("#btnUpdate").bind("click", function() {
+			location.href = "myinfo.html?memail=" + memail ;
+		});  
+		//바깥 ajax
+		//alert(memail);
+		 
+		$
+				.ajax({
+					url : "/KingsMan/cart/" + memail,
+					type : "GET",
+					dataType : "json",
+					contentType : "application/json;charset=utf-8",
+					success : function(aaaa) {
+						var datas = aaaa.cartResults;
+						for (var j = 0; j < datas.length; j++) { //for 시작
+							var datas1 = datas[j];
+							var pserial = datas1.pserial;
+							var arrCnum = new Array();
+							arrCnum[j] = datas1.cnum;
+							$
+									.ajax({
+										url : "/KingsMan/productOne/" + pserial,
+										type : "GET",
+										dataType : "json",
+										contentType : "application/json;charset=utf-8",
+										async:false,
+										success : function(bbbb) {
+											var datas2 = bbbb.product;
+											//alert("현재 상품명 " + datas2.pname);
+											var str = "";
+											var quantity = 1;
+											var shippingFee = "Free";
+											var imgA = "";
+											var idxB = datas2.pimg.indexOf(",");
+											imgA = datas2.pimg.substring(0,	idxB);
+											//alert(imgA);
+											
+											str += "<tr>"
+													/* + "<td style='vertical-align: middle;'><input type='checkbox' class='checkSelectBtn' id = 'select" + datas1.cnum+ "'></td>" */
+													+ "<td>"
+													+ "<img src='" + imgA+ "' height='120'><br/>"
+													+ /*  datas2.pserial + */datas2.pname
+													+"<input type='hidden' id='psize"+ datas1.cnum +"' value='"+datas2.psize+"' >"
+													+"<input type='hidden' id='pcode"+ datas1.cnum +"' value='"+datas2.pcode +"' >"
+													+ "[옵션:"
+													+ datas2.psize
+													+ "mm] </td>"
+													+ "<td style='vertical-align: middle;'>"
+													+ datas2.pprice
+													+ "</td>"
+													+ "<td style='vertical-align: middle;'>수량 : "
+													+ quantity
+													+ "</td>"
+													+ "<td style='vertical-align: middle;'> "
+													+ shippingFee
+													+ "</td>"
+													+ "<td style='vertical-align: middle;'>"
+													+ datas2.pprice
+													+ "</td>"
+													+ "<td style='vertical-align: middle;'><button class='delete' id='delete" + datas1.cnum + "'>삭제</button>"
+													+ "<button class='payment' id='payment" + datas1.cnum +"'>구매 </button>"
+													+ "</td>" + "</tr>";
+											//alert("받아온 발사이즈 : "+datas2.psize);
+											psize = datas2.psize;
+											pcode = datas2.pcode;
+											//alert("찍은 발사이즈 : "+psize);
+											var pcode = $("#pcode").val()
+											var ostr = $("#datas").html();
+											$("#datas").html(ostr + str);
+											$("#productprice1").html(
+													datas2.pprice);
+											$("#productprice2").html(
+													datas2.pprice);
+											$('.delete').click(function() {
+												//alert("삭제"+$(this).attr("id"));
+												var dcnum = $(this).attr("id").substr(6);
+												//alert(dcnum)
+												 $.ajax({
+													url : "/KingsMan/cart/" + dcnum,
+													type : "DELETE",
+													dataType : "json",
+													contentType : "application/json;charset=utf-8",
+													success : function(data) {
+														alert("장바구니 삭제 성공");
+														history.go(0);
+													}, 
+													error : function(err){
+														alert("장바구니 삭제 실패");
+													}
+												});  
+											
+											});
+											$('.payment').click(function() {
+												//alert("구매"+$(this).attr("id"));
+												var pcnum = $(this).attr("id").substr(7);
+												//alert(pcnum);
+												var sizeid = "psize"+pcnum;
+												psize = document.getElementById(sizeid).value;
+												//alert("구입누르면 나오는 발사이즈 : "+psize);
+												
+												var codeid = "pcode"+pcnum;
+												pcode = document.getElementById(codeid).value;
+												//alert("구입누르면 나오는 코드 : "+pcode);
+												
+												location.replace("payment.html?memail=" + memail	+ "&pcode=" + pcode + "&psize=" + psize+"&pserial="+pserial);
+											});
+
+										},
+										error : function(error) {
+											alert("inner ajax error = " + error);
+											console.log(error);
+										}
+									});
+						}//for 끝
+					},
+					error : function(err) {
+						alert("outer ajax err = " + err);
+					}
+				});
+	});
+</script>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-default navbar-expand-lg navbar-light"
+		style="background-color: #f8f8f8;">
+		<div id="navbarCollapse"
+			class="collapse navbar-collapse justify-content-start">
+
+			<ul class="nav navbar-nav navbar-right ml-auto">
+				<li class="nav-item"><a data-toggle="modal" id="topLogin"
+					data-target="#myModal" href="#">Login</a>
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" data-backdrop="false">
+						<div class="login-form">
+							<form action="" method="post">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+								<h2 class="text-center">Login</h2>
+								<br />
+								<div class="text-center social-btn">
+									<a href="#" class="btn btn-warning btn-block"><i
+										class="fa kakao"></i> Sign in with <b>Kakao</b></a> <a href="#"
+										class="btn btn-success btn-block"><i class="fa naver"></i>
+										Sign in with <b>Naver</b></a> <a href="#"
+										class="btn btn-danger btn-block"><i class="fa google"></i>
+										Sign in with <b>Google</b></a>
+								</div>
+							</form>
+
+							<div class="hint-text small">
+								계정이 없으시다면 <a href="#" class="text-success">Register Now!</a>
+							</div>
+						</div>
+					</div></li>
+				<li class="nav-item"><a href="register.html" id="signUp">Sign up</a></li>
+				<li class="nav-item"><a href="myinfo.html">My info</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container" id="wrapper">
+		<!--센터로고-->
+		<a href="#" id="btnHome"><img src=images/kingsman.png
+			width="400" id="kingsman1"></a>
+
+		<hr>
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+		<!--CART 제목글-->
+		<div class="row">
+			<h1 id="subject">CART</h1>
+			<h2>ㅡ</h2>
+		</div>
+		<div class="table-responsive">
+			<!--첫 테이블-->
+			<table class="table table-hover table-bordered table-condensed">
+				<thead>
+					<tr class="active" id="firstrow">
+						<!-- <th><input id="checkAllBtn" type="checkbox"></th> -->
+						<th>Product</th>
+						<th>Price</th>
+						<th>QTY</th>
+						<th>Ship</th>
+						<th>Total</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+
+				<tbody id="datas">
+					<!--
+            <tr>
+              <td style="vertical-align: middle;"><button>X</br>삭제</button></td>
+              <td>
+                <img src="images/product1.jpg" width="150" height="120">
+                4894
+                [옵션: UK 8 (270mm)]
+              </td>
+              <td style="vertical-align: middle;">235000</td>
+              <td style="vertical-align: middle;">수량 : 1</td>
+              <td style="vertical-align: middle;">무료</td>
+              <td style="vertical-align: middle;">235000</td>
+            </tr>
+            -->
+				</tbody>
+
+			</table>
+
+			<hr>
+
+			<div class="row">
+				<div class="col-xs-8">&nbsp;</div>
+				<div class="col-xs-2">Product Price</div>
+				<div class="col-xs-1" id="productprice1"></div>
+				<div class="col-xs-1">KRW</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-8">&nbsp;</div>
+				<div class="col-xs-2">Shipping Charge</div>
+				<div class="col-xs-1">0+</div>
+				<div class="col-xs-1">(지역)</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-8">&nbsp;</div>
+				<div class="col-xs-2">Total Price</div>
+				<div class="col-xs-1">
+					<strong id="productprice2"></strong>
+				</div>
+				<div class="col-xs-1">
+					<strong>KRW</strong>
+				</div>
+			</div>
+
+			<hr class="lowhr">
+
+			<div id="INFO">
+				<h6>INFO</h6>
+				<ul>
+
+					<li>무이자할부 상품 주문의 경우, 무이자할부 혜택을 받으시려면 '장바구니 - 무이자할부 상품' 아래의
+						[주문하기] 버튼을 눌러 주문/결제 하시면 됩니다.</li>
+					<li>[전체 상품 주문] 버튼을 누르시면 장바구니의 구분없이선택된 모든 상품에 대한 주문/결제가 이루어집니다.
+						단, 전체 상품을 주문/결제하실 경우, 상품별 무이자할부 혜택을 받으실 수 없습니다.</li>
+					<li>선택하신 상품의 수량을 변경하시려면 수량변경 후 [수정] 버튼을 누르시면 됩니다. [쇼핑 계속] 버튼을
+						누르시면 쇼핑을 계속 하실 수 있습니다.</li>
+					<li>장바구니에 담긴 상품은 7일 동안 보관됩니다. 보관된 상품은 7일 이후에 삭제되오니 장바구니에서 삭제된
+						경우 다시 장바구니에 담으시기 바랍니다.</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<hr>
+
+	</div>
+
+	<footer class="panel-footer" id="footer">
+
+		<div class="row">
+
+			<div class="col-xs-4" id="footerleft">
+				<!--footer를 크게 3등분했을 때 left부분-->
+
+				<div>&nbsp;</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerleft-1">
+					<!--footer의 left부분에서 내용있는 첫 줄-->
+					<div class="col-xs-3">blog</div>
+					<div class="col-xs-3">FAQ</div>
+					<div class="col-xs-3">문의하기</div>
+					<div class="col-xs-3">&nbsp;</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerleft-2">
+					<!--footer의 left부분에서 내용있는 두번째 줄-->
+					<div class="col-xs-1">
+						<span class="glyphicon glyphicon-earphone"></span>
+					</div>
+					<div class="col-xs-3">02-111-1111</div>
+					<div class="col-xs-1">|</div>
+					<div class="col-xs-6">킹스맨(Kings@Kings.Kom)</div>
+					<div class="col-xs-1">&nbsp;</div>
+				</div>
+
+				<div class="row" id="footerleft-3">
+					<!--footer의 left부분에서 내용있는 세번째 줄-->
+					<div class="col-xs-1">
+						<!-- <span class="glyphicon glyphicon-home"></span> -->
+						<span class="glyphicon glyphicon-road"></span>
+					</div>
+					<div class="col-xs-10">Huntsman, Savile Row, London W1</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div>&nbsp;</div>
+
+			</div>
+			<!--footerleft 끝 -->
+
+			<div class="col-xs-4" id="footercenter">
+				<!--footer를 크게 3등분했을 때 center부분-->
+				<div>&nbsp;</div>
+
+			</div>
+			<!--footercenter 끝-->
+
+			<div class="col-xs-4" id="footerright">
+				<!--footer를 크게 3등분했을 때 right부분-->
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerright-1">
+					<!--footer의 right부분에서 내용있는 첫 줄(사진)-->
+					<div class="col-xs-6">&nbsp;</div>
+					<div class="col-xs-6">
+						<img src="images/instagram.PNG" width="50" height="50">
+					</div>
+				</div>
+
+				<div>&nbsp;</div>
+
+				<div class="row" id="footerright-2">
+					<!--footer의 right부분에서 내용있는 두번째 줄-->
+					<div class="col-xs-2">&nbsp;</div>
+					<div class="col-xs-4">Terms of Service</div>
+					<div class="col-xs-2">|</div>
+					<div class="col-xs-4">Privacy Policy</div>
+				</div>
+
+				<div class="row" id="footerright-2">
+					<!--footer의 right부분에서 내용있는 두번째 줄-->
+					© berwickkorea.com, All right reserved.
+				</div>
+
+			</div>
+			<!--footerright 끝-->
+
+		</div>
+
+	</footer>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

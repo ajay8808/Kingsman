@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>회원정보 상세보기</title>
+<script src="js/jquery-3.5.0.min.js"></script>
+</head>
+<body>
+	<script th:inline="javascript">
+		$(function() {
+			var email =  [[ ${#authentication.principal.attributes.email} ]];
+			var name = [[ ${#authentication.principal.attributes.name} ]];
+			/* alert("email = " + email);
+			alert("name = " + name);  */
+			if (email != "") {
+				$.ajax({
+					url : "/KingsMan/member/" + email,
+					type : "GET",
+					dataType : "json",
+					success : function(data) { //서버로부터 받은 데이터
+						var member = data.memberResult;
+						var memail = null;
+						var mname = null;
+						if(member != null){
+							member = data.memberResult;
+							memail = member.memail;
+							mname = member.mname;
+							location.replace("main.html?memail=" + memail
+									+ "&mname=" + mname);
+						}
+						else{
+							location.replace('register.html?memail=' + email + '&mname=' + name);	
+						}
+					},
+					error : function(err) {
+						alert("계정 검증중 에러 발생");
+					}
+				});
+			}
+
+		});
+	</script>
+</body>
+</html>
