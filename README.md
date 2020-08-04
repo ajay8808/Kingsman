@@ -1,5 +1,6 @@
-# Kingsman
-## 주요기능 
+# Kingsman 쇼핑몰 프로젝트
+## First Spring Project(team)
+### 주요기능 
   1.Oauth Login
   2.결제
   3.주문
