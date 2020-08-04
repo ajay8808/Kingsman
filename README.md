@@ -12,4 +12,6 @@ First Spring Project(team)
   - 내 정보 수정
   - 장바구니
   - 주문관리 
+  
+  ![20200610_231733](https://user-images.githubusercontent.com/48876700/89269492-e7b26500-d674-11ea-89e8-011d9c91208d.png)
 ### First Spring Project(team)
