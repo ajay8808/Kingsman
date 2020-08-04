@@ -1,6 +1,6 @@
 # Kingsman 쇼핑몰 프로젝트
 
-## First Spring Project(team)
+First Spring Project(team)
 
 
 
@@ -12,3 +12,4 @@
   5.내 정보 수정
   6.장바구니
   7.주문관리 
+- First Spring Project(team)
