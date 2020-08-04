@@ -6,6 +6,7 @@ First Spring Project(team)
 
 ### 주요기능 
   - Oauth Login
+  - 회원가입
   - 결제
   - 주문
   - 마이페이지
